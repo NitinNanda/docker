@@ -1,0 +1,35 @@
+// pull image from dockerhub
+docker pull {imageName}
+
+// Run docker image (first pull if already not present)
+docker run {imageName} 
+
+//list all docker images present in the disk
+docker images
+
+//list all running container
+docker ps
+
+//list all exited/running container
+docker ps -a
+
+// delete/remove a container
+docker rm {containerId/containerName}
+
+// delete/remove all containers
+docker rm $(docker ps -a -q)
+
+// delete/remove an image
+docker rmi {imageId/imageName}
+
+// delete/remove all images
+docker rmi $(docker images -q)
+
+// stop a running conatiner. May take a couple of seconds
+docker stop {containerId/containerName}
+
+// detatch. When you run a container, this flag will return you to the console so you can write other commands while the conatiner runs
+-d flag 
+
+// quiet flag. return only numerical values.
+-q
