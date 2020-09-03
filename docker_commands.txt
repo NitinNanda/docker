@@ -33,3 +33,28 @@ docker stop {containerId/containerName}
 
 // quiet flag. return only numerical values.
 -q
+
+// execute a command on a running container
+docker exec {containerId/containerName} {any command}
+
+// interactive mode
+-i
+
+// attach to the continer's terminal
+-t
+
+// map the localhost port to the docker conatiner port
+-p
+// example: docker run -p 80:5000 {someImage}
+
+// -Volume mapping. Map an external file to a file inside the docker container
+docker run -v /opt/datadir:/var/lib/mysql mysql
+
+// Inspect Container
+docker inspect {containerId/containerName}
+
+// Conatiner Logs
+docker logs {containerId/containerName}
+
+// Check details of the running container such as port number on which the service is running
+docker inspect {containerId}
