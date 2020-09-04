@@ -1,0 +1,38 @@
+How to create a docker image.
+
+1) Install the app from scratch(on a new host) including all the dependencies and make sure its working fine.
+
+2) Using the 'History' command, write down all the commands you had to run to intall the dependencies. Say,
+	app-get update
+	app-get install -y python
+	app-get install python-pip
+	pip install flask
+	Create/Copy application code to /opt/app.py
+	
+	FLASK_APP=/opt/app.py flask run --host=0.0.0.0
+	
+3) Create a DockerFile in a directory
+	cat > DockerFile
+
+4) Contents:
+
+// first statement of a dockerfile must always start from the 'FROM' command. You can give an OS or an existing valid docker image after the 'FROM' keyword.
+FROM ubuntu
+
+// use 'RUN' to run all the commands that you discovered are dependencies of the app.
+RUN app-get update
+RUN app-get install -y python
+RUN app-get install python-pip
+RUN pip install flask
+
+// Now copy the required sourcecode into the appropriate file inside docker container.
+// Here we are copying the app.py to the '/opt/app.py' location.
+COPY app.py /opt/app.py
+
+// Use ENTRYPOINT to provide command to initially run your application.
+ENTRYPOINT FLASK_APP=/opt/app.py flask run --host=0.0.0.0
+
+5) Use 'docker build .' command to build the docker image.
+
+Note: you can also give a tag to the image while building it. For example:
+docker build . -t my-simple-web-app
