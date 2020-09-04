@@ -1,0 +1,8 @@
+1) You need to build the docker image with your accountName and tag name in order to push it to docker hub.
+	dokcer build . -t nitinnanda/my-simple-web-app
+	
+2) First login to your account from the terminal before trying to push the image else it will fail.
+	docker login
+
+3) Push to the dockerhub
+	docker push nitinnanda/my-simple-web-app
