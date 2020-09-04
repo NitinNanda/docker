@@ -1,0 +1,6 @@
+1) Enter environment variables at runtime.
+	docker run -e APP_COLOR=blue simple-webapp-color 
+	or
+	docker run -e APP_COLOR=red simple-webapp-color 
+2) Inspect running docker to get the environment variables
+	docker inspect {containerName}
