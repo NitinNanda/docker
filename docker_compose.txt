@@ -1,0 +1,72 @@
+1) Line one container to another
+	--link
+	example: docker run -d --name=webapp -p 5000:80 --link redis:redis my-webapp
+	
+2) A docker-compose.yml file (Version 1 of docker-compose)
+	redis:
+		image: redis
+	db: 
+		image: postgres:9.4
+	vote:
+		image: voting-app
+		ports: 
+			- 5000:80
+		links: 
+			-redis
+	result: 
+		image: result-app
+		ports:
+			-5001:80
+		links:
+			- db
+	worker:
+		image: worker
+		links:
+			- redis
+			- db
+			
+			
+Run 'docker-compose up' to bring up the entire application stack
+		
+3) Version 2 of docker compose
+	- You need to specify the version of the docker-compose file at the top
+	- docker-compose version 2 creates a new dedicated bridge network each time you run docker-compose.\
+	  That means now you don't need to provide --links for containers to be able to talk to each other.
+	  The containers will talk to each other using their service names
+	- If one container needs to run before another()
+	
+	
+	version: 2
+	services:
+		redis:
+			image: redis
+			networks:
+				- back-end
+		db: 
+			image: postgres:9.4
+			networks:
+				- back-end
+		vote:
+			image: voting-app
+			ports: 
+				- 5000:80
+			networks:
+				- back-end
+				- front-end
+		result: 
+			image: result-app
+			ports:
+				-5001:80
+			networks:
+				- back-end
+				- front-end
+		worker:
+			image: worker
+			networks:
+				- back-end
+			
+	networks:
+		front-end:
+		back-end:
+			
+4) Version 3 supports docker swarm
