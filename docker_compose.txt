@@ -73,3 +73,6 @@ Run 'docker-compose up' to bring up the entire application stack
 		back-end:
 			
 4) Version 3 supports docker swarm
+
+5) See the steps performed to create a particular image(docker-compose steps)
+	- docker history
