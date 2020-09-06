@@ -24,6 +24,9 @@
 		links:
 			- redis
 			- db
+		depends_on:
+			- "redis"
+			- "db"
 			
 			
 Run 'docker-compose up' to bring up the entire application stack
